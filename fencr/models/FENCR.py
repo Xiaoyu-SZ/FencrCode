@@ -75,7 +75,7 @@ class AndOrLayer(torch.nn.Module):
         vectors = self.value_trans(vectors)  # B * S * L * f * v
         cross = vectors.sum(
             dim=-2).pow(2) - vectors.pow(2).sum(dim=-2) + vectors.sum(dim=-2)  # ? * v
-        cross_n = select.sum(dim=-1, keepdim=True)  # B * S * L * 1(1的个数？)
+        cross_n = select.sum(dim=-1, keepdim=True)  # B * S * L * 1
         cross = cross / cross_n.pow(2)  # ? * v
         results = self.final_trans(cross)  # ? * v
         return results  # B * S * L * v
